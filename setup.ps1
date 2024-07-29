@@ -12,3 +12,4 @@ if ($pytorch_output -match "No module named 'torch'") {
 
 pip install gymnasium # gymnasium==0.29.1
 pip install stable-baselines3[extra] # stable_baselines3[extra]==2.3.2
+pip install tensorboard # tensorboard==2.17.0
