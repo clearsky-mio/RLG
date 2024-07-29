@@ -46,7 +46,7 @@ def main():
     
 
 def epsilonCompare(n:int):
-    logger = SummaryWriter(os.path.join("logs", time.strftime("%Y-%m-%d-%H-%M-%S")))
+    logger = SummaryWriter(os.path.join("logs", "Epsilon-Greedy", time.strftime("%Y-%m-%d-%H-%M-%S")))
     
     bandit = MultiArmedBandit(5)
     epsilons = np.linspace(0, 1, n, dtype=np.float32)
