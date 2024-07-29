@@ -30,27 +30,7 @@ class EpsilonGreedySolver(MABSolver):
         return action, reward, self.regrect
 
 
-def main():
-    k = np.random.randint(0, 20)
-    bandit = MultiArmedBandit(10)
-    epsilon = 0.2
-
-    solver = EpsilonGreedySolver(bandit=bandit, epsilon=epsilon)
-    solver.learn()
-
-    print(f"estimation is {solver.estimation}")
-    print(f"real probs is {bandit._probs}")
-    print(f"choise have been try {solver.counts}")
-
-    print(
-        f"estimate best choise is {np.argmax(solver.estimation)}, its value is {solver.values[solver.estimate_best_action]}"
-    )
-    print(
-        f"real best choise is {np.argmax(bandit._probs)}, its value is {np.max(bandit._probs)}"
-    )
-
-
-def epsilonCompare(n: int):
+def main(n: int):
     logger = SummaryWriter(
         os.path.join("logs", "Epsilon-Greedy", time.strftime("%Y-%m-%d-%H-%M-%S"))
     )
@@ -60,8 +40,19 @@ def epsilonCompare(n: int):
     solvers = [EpsilonGreedySolver(bandit, epsilon) for epsilon in epsilons]
     for solver in solvers:
         solver.learn(10000, logger)
+        print("*" * 80)
+        print(f"estimation is {solver.estimation}")
+        print(f"real probs is {bandit._probs}")
+        print(f"choise have been try {solver.counts}")
+
+        print(
+            f"estimate best choise is {np.argmax(solver.estimation)}, its value is {solver.values[solver.estimate_best_action]}"
+        )
+        print(
+            f"real best choise is {np.argmax(bandit._probs)}, its value is {np.max(bandit._probs)}"
+        )
+        print("*" * 80)
 
 
 if __name__ == "__main__":
-    # main()
-    epsilonCompare(5)
+    main(5)
