@@ -1,5 +1,5 @@
 from MAB.Game.MultiArmedBandit import MultiArmedBandit
-from Solver.MABSolver import MABSolver
+from MAB.Solver.MABSolver import MABSolver
 from torch.utils.tensorboard import SummaryWriter
 
 import numpy as np
