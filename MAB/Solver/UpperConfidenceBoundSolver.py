@@ -9,25 +9,20 @@ import time
 
 
 class UpperConfidenceBoundSolver(MABSolver):
-    def __init__(self, bandit: MultiArmedBandit, c: float):
+    def __init__(self, bandit: MultiArmedBandit, exploration: float):
         super().__init__(bandit)
-        self.c = c  # exploration parameter
+        self.c = exploration  # exploration parameter
         self.step = 0
-        self.name = "UpperConfidenceBoundSolver " + str(c)
+        self.name = "UpperConfidenceBoundSolver " + str(exploration)
 
     def select_action(self):
         ucb = self.values + self.c * np.sqrt(
             np.log(self.step + 1) / (2 * (self.counts + 1))
         )
-        # print(f"values is {self.values}")
-        # print(f"step is {self.step}")
-        # print(f"n is {self.counts + 1}")
-        # print(f"ucb is {ucb}")
         return np.argmax(ucb)
 
     def run_one_step(self):
         action = self.select_action()
-        # print(f"select {action}")
         reward = self.bandit.step(action)
         self.regrect += self.values.max() - reward
         self.update_estimation(action, reward)
