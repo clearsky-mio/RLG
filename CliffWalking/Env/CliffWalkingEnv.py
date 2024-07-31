@@ -3,9 +3,9 @@ from enum import Enum
 
 
 class CliffWalkingEnv:
-    def __init__(self, col, row) -> None:
-        self.col = col
+    def __init__(self, row, col) -> None:
         self.row = row
+        self.col = col
         self.action_count = 4
         self.action = [[0, -1], [0, 1], [-1, 0], [1, 0]]
         self.start = [0, 0]
